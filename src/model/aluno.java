@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import com.sun.istack.internal.NotNull;
@@ -8,7 +9,7 @@ import com.sun.istack.internal.NotNull;
 @Entity
 public class aluno {
 	
-	@Id
+	@Id @GeneratedValue
 	private Long id;
 	
 	@NotNull

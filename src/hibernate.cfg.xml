@@ -17,7 +17,7 @@
 		<property name="hibernate.show_sql">true</property>
 		<property name="hibernate.format_sql">true</property>
 		
-		<!-- mapping class="br.com.grupofortes.intranet.model.administracao.Bloco" /-->
+		<mapping class="model.aluno" />
 		
 	</session-factory>
 </hibernate-configuration>

@@ -19,7 +19,7 @@ public class aluno {
 		this.result = result;
 	}
 	@Get("")
-	public void alunosList() {
+	public void alunos() {
 		result.include("alunos", alunoDao.list());
 	}
 
@@ -39,20 +39,20 @@ public class aluno {
 	@Post("")
 	public void save( model.aluno aluno ) {
 		alunoDao.save(aluno);
-		result.redirectTo(this).alunosList();
+		result.redirectTo(this).alunos();
 	}
 	
 	@Put("")
 	public void update( model.aluno aluno ) {
 		alunoDao.update(aluno);
-		result.redirectTo(this).alunosList();
+		result.redirectTo(this).alunos();
 	}
 	
 	@Delete("/{id}")
 	public void delete( Long id ) {
 		model.aluno aluno = alunoDao.load(id);
 		alunoDao.delete(aluno);
-		result.redirectTo(this).alunosList();
+		result.redirectTo(this).alunos();
 	}
 	
 }

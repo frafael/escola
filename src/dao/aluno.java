@@ -5,6 +5,10 @@ import java.util.List;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import br.com.caelum.vraptor.ioc.Component;
+import br.com.caelum.vraptor.ioc.RequestScoped;
+
+@Component @RequestScoped
 public class aluno {
 	@SuppressWarnings("unchecked")
 	public List<model.aluno> list() {
