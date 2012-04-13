@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import com.sun.istack.internal.NotNull;
 
 @Entity
-public class aluno {
+public class Aluno {
 	
 	@Id @GeneratedValue
 	private Long id;

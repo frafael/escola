@@ -1,5 +1,6 @@
 package controller;
 
+import dao.AlunoDao;
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
@@ -8,51 +9,54 @@ import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 
-@Resource @Path("/alunos")
-public class aluno {
+@Resource @Path("/")
+public class AlunoController {
 	
 	private Result result;
-	private dao.aluno alunoDao;
+	private AlunoDao alunoDao;
 	
-	public aluno( Result result, dao.aluno alunoDao) {
-		this.alunoDao = alunoDao;
+	public AlunoController( Result result, AlunoDao alunoDao) {
 		this.result = result;
+		this.alunoDao = alunoDao;
 	}
-	@Get("")
+	
+	@Path("")
+	public void index() {}
+	
+	@Get("alunos")
 	public void alunos() {
 		result.include("alunos", alunoDao.list());
 	}
 
-	@Get("/new")
+	@Get("alunos/new")
 	public void formulario() {}
 	
-	@Get("/{id}/edit")
+	@Get("alunos/{id}/edit")
 	public void edit( Long id ) {
 		result.include("aluno", alunoDao.load(id)).forwardTo(this).formulario();
 	}
 	
-	@Get("/{id}/show")
+	@Get("alunos/{id}/show")
 	public void show( Long id ) {
 		result.include("aluno", alunoDao.load(id));
 	}
 	
-	@Post("")
-	public void save( model.aluno aluno ) {
+	@Post("alunos")
+	public void save( model.Aluno aluno ) {
 		alunoDao.save(aluno);
 		result.redirectTo(this).alunos();
 	}
 	
-	@Put("")
-	public void update( model.aluno aluno ) {
+	@Put("alunos")
+	public void update( model.Aluno aluno ) {
 		alunoDao.update(aluno);
 		result.redirectTo(this).alunos();
 	}
 	
-	@Delete("/{id}")
+	@Delete("alunos/{id}")
 	public void delete( Long id ) {
-		model.aluno aluno = alunoDao.load(id);
+		model.Aluno aluno = alunoDao.load(id);
 		alunoDao.delete(aluno);
 		result.redirectTo(this).alunos();
 	}
-	
 }
