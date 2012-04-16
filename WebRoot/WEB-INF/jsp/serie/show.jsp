@@ -2,14 +2,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="../index/header.jsp" />
 	<div id="conteudos">
-		<div id="topoConteudo">Alunos</div>
+		<div id="topoConteudo">Séries</div>
 		<div id="page_container">
 	  		<fieldset>
-	  			<legend>Dados do aluno</legend>
-	  				<div>Nome: ${aluno.nome}</div>
-		  			<div>Série: ${aluno.serie}</div>
+	  			<legend>Dados do serie</legend>
+	  				<div>Nome: ${serie.nome}</div>
 	  		</fieldset>
 		</div>
-		<a class="btn" href="<c:url value='/alunos'/>">Voltar</a>
+		<a class="btn" href="<c:url value='/series'/>">Voltar</a>
 	</div>
 <jsp:include page="../index/footer.jsp" />

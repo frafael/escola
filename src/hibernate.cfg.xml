@@ -18,5 +18,7 @@
 		<property name="hibernate.format_sql">true</property>
 
 		<mapping class="model.Aluno" />
+		<mapping class="model.Serie" />
+		<mapping class="model.Materia" />
 	</session-factory>
 </hibernate-configuration>

@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="../index/header.jsp" />
-	<div id="topoConteudo">Alunos</div>
-	<div id="alunos">
-		<form id="formDelete" method="post" action="<c:url value='/alunos/?'/>">
+	<div id="topoConteudo">Séries</div>
+	<div id="series">
+		<form id="formDelete" method="post" action="<c:url value='/series/?'/>">
 			<input type="hidden" name="_method" value="DELETE" />
 		</form>
 		<div id="page_container">
@@ -11,34 +11,29 @@
 				<thead>
 					<tr>
 						<th>Ações</th>
-						<th>Nome</th>
 						<th>Série</th>
 					</tr>
 				</thead>
 				<tbody class="content">
-					<c:forEach items="${alunos}" var="aluno">
-						<tr alunoid="${aluno.id}">
+					<c:forEach items="${series}" var="serie">
+						<tr serieid="${serie.id}">
 							<td id="acoes">
-								<a href="<c:url value='/alunos/${aluno.id}/edit'/>">
+								<a href="<c:url value='/series/${serie.id}/edit'/>">
 									<img src="<c:url value='/img/icones/editar.png'/>" title="Editar" />
 								</a>
-								<span onclick="escola.formDelete(${aluno.id});">
+								<span onclick="escola.formDelete(${serie.id});">
 									<img src="<c:url value='/img/icones/excluir.png'/>" title="Excluir" />
 								</span>
-								<a href="<c:url value='/alunos/${aluno.id}/boletim'/>">
-									<img src="<c:url value='/img/icones/boletim.png'/>" title="Boletim" />
-								</a>
 							</td>
 							<td>
-								<a href="<c:url value='/alunos/${aluno.id}/show'/>">${aluno.nome}</a>
+								<a href="<c:url value='/series/${serie.id}/show'/>">${serie.nome}</a>
 							</td>
-							<td>${aluno.serie.nome}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
-		<a class='btn primary' href="<c:url value='/alunos/new'/>" id="cadastrarAluno">Novo aluno</a>
+		<a class='btn primary' href="<c:url value='/series/new'/>" id="cadastrarSerie">Nova série</a>
 	</div>
 	<script type="text/javascript">
 		

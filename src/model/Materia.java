@@ -3,24 +3,17 @@ package model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-
-import com.sun.istack.internal.NotNull;
+import javax.validation.constraints.NotNull;
 
 @Entity
-public class Aluno {
+public class Materia {
 	
 	@Id @GeneratedValue
 	private Long id;
 	
 	@NotNull
 	private String nome;
-	
-	@OneToOne
-	private Serie serie;
-	
-	private String numero;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -35,21 +28,5 @@ public class Aluno {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public Serie getSerie() {
-		return serie;
-	}
-
-	public void setSerie(Serie serie) {
-		this.serie = serie;
-	}
-	
-	public String getNumero() {
-		return numero;
-	}
-
-	public void setNumero(String numero) {
-		 this.numero = numero;
 	}
 }

@@ -1,6 +1,8 @@
 package controller;
 
+import model.Aluno;
 import dao.AlunoDao;
+import dao.SerieDao;
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
@@ -14,10 +16,12 @@ public class AlunoController {
 	
 	private Result result;
 	private AlunoDao alunoDao;
+	private SerieDao serieDao;
 	
-	public AlunoController( Result result, AlunoDao alunoDao) {
+	public AlunoController( Result result, AlunoDao alunoDao, SerieDao serieDao) {
 		this.result = result;
 		this.alunoDao = alunoDao;
+		this.serieDao = serieDao;
 	}
 	
 	@Path("")
@@ -29,7 +33,9 @@ public class AlunoController {
 	}
 
 	@Get("alunos/new")
-	public void formulario() {}
+	public void formulario() {
+		result.include("series", serieDao.list());
+	}
 	
 	@Get("alunos/{id}/edit")
 	public void edit( Long id ) {
@@ -42,21 +48,26 @@ public class AlunoController {
 	}
 	
 	@Post("alunos")
-	public void save( model.Aluno aluno ) {
+	public void save( Aluno aluno ) {
 		alunoDao.save(aluno);
 		result.redirectTo(this).alunos();
 	}
 	
 	@Put("alunos")
-	public void update( model.Aluno aluno ) {
+	public void update( Aluno aluno ) {
 		alunoDao.update(aluno);
 		result.redirectTo(this).alunos();
 	}
 	
 	@Delete("alunos/{id}")
 	public void delete( Long id ) {
-		model.Aluno aluno = alunoDao.load(id);
+		Aluno aluno = alunoDao.load(id);
 		alunoDao.delete(aluno);
 		result.redirectTo(this).alunos();
+	}
+	
+	@Get("alunos/{id}/boletim")
+	public void boletim( Long id ) {
+		result.include("aluno", alunoDao.load(id));
 	}
 }
