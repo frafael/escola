@@ -22,8 +22,8 @@
 								<a href="<c:url value='/alunos/${aluno.id}/edit'/>">
 									<img src="<c:url value='/img/icones/editar.png'/>" title="Editar" />
 								</a>
-								<span onclick="escola.formDelete(${aluno.id});">
-									<img src="<c:url value='/img/icones/excluir.png'/>" title="Excluir" />
+								<span class="btn btn-danger" onclick="escola.formDelete(${aluno.id});">
+									<i class="icon-trash icon-white"></i> Delete
 								</span>
 								<a href="<c:url value='/alunos/${aluno.id}/boletim'/>">
 									<img src="<c:url value='/img/icones/boletim.png'/>" title="Boletim" />
@@ -31,6 +31,17 @@
 							</td>
 							<td>
 								<a href="<c:url value='/alunos/${aluno.id}/show'/>">${aluno.nome}</a>
+								<div class="btn-group">
+						          <a class="btn btn-primary" href="<c:url value='/alunos/${aluno.id}/show'/>"><i class="icon-user icon-white"></i> ${aluno.nome}</a>
+						          <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+						          <ul class="dropdown-menu">
+						            <li><a href="<c:url value='/alunos/${aluno.id}/edit'/>"><i class="icon-pencil"></i> Editar</a></li>
+						            <li><span onclick="escola.formDelete(${aluno.id});"></span><i class="icon-trash"></i> Deletar</a></li>
+						            <li><a href="#"><img src="<c:url value='/img/icones/boletim.png'/>" title="Boletim" /> Boletim</a></li>
+						            <li class="divider"></li>
+						            <li><a href="#"><i class="i"></i> Make admin</a></li>
+						          </ul>
+						        </div>
 							</td>
 							<td>${aluno.serie.nome}</td>
 						</tr>

@@ -7,7 +7,7 @@
 	  		<fieldset>
 	  			<legend>Dados do aluno</legend>
 	  				<div>Nome: ${aluno.nome}</div>
-		  			<div>Série: ${aluno.serie}</div>
+		  			<div>Série: ${aluno.serie.nome}</div>
 	  		</fieldset>
 		</div>
 		<a class="btn" href="<c:url value='/alunos'/>">Voltar</a>

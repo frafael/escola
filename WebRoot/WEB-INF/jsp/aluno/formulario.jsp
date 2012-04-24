@@ -25,7 +25,7 @@
 		  			<select name="aluno.serie.id">
 		  			  <option value="">Escolha uma série...</option>
 		  			  <c:forEach items="${series}" var="serie">
-					  	<option value="${serie.id}">${serie.nome}</option>
+					  	<option <c:if test="${serie.id == aluno.serie.id}">selected="selected"</c:if> value="${serie.id}">${serie.nome}</option>
 					  </c:forEach>
 					</select>
 		  		</div>

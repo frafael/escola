@@ -5,20 +5,24 @@
 		<div id="topoConteudo">Boletim</div>
 		<div id="page_container">
 	  		<fieldset>
-	  			<legend>${aluno.nome} - Nº ${aluno.numero} ${aluno.serie.}</legend>
-	  				<table>
-	  					<thead>
-	  						<tr>
-	  							<th>Matérias</th>
-	  							<th>1º Bimestre</th>
-	  							<th>2º Bimestre</th>
-	  							<th>3º Bimestre</th>
-	  							<th>4º Bimestre</th>
-	  						</tr>
-	  					</thead>
-	  						
-	  					<tbody>
-	  					</tbody>
+	  			<legend>${aluno.nome} - Nº ${aluno.numero} ${aluno.serie.nome}</legend>
+	  				<table class="table table-striped table-bordered table-condensed">
+		  				<tr>
+							<td>Matérias</td>
+							<td>1º Bimestde</td>
+							<td>2º Bimestde</td>
+							<td>3º Bimestde</td>
+							<td>4º Bimestde</td>
+						</tr>
+						<c:forEach items="${aluno.serie.materias}" var="materia">
+							<tr>
+								<td>${materia.nome}</td>
+								<td>-</td>
+								<td>-</td>
+								<td>-</td>
+								<td>-</td>
+							</tr>
+						</c:forEach>
 	  				</table>
 	  		</fieldset>
 		</div>
