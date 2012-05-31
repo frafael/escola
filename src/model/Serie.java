@@ -6,10 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Serie {
@@ -19,8 +16,7 @@ public class Serie {
 
 	private String nome;
 	
-	@OneToMany
-    @Cascade({CascadeType.REMOVE})
+	@ManyToMany
 	private List<Materia> materias;
 
 	public Long getId() {

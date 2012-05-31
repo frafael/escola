@@ -9,18 +9,27 @@
 	  				<table class="table table-striped table-bordered table-condensed">
 		  				<tr>
 							<td>Matérias</td>
-							<td>1º Bimestde</td>
-							<td>2º Bimestde</td>
-							<td>3º Bimestde</td>
-							<td>4º Bimestde</td>
+							<td>1º Bimestre</td>
+							<td>2º Bimestre</td>
+							<td>3º Bimestre</td>
+							<td>4º Bimestre</td>
 						</tr>
 						<c:forEach items="${aluno.serie.materias}" var="materia">
 							<tr>
 								<td>${materia.nome}</td>
-								<td>-</td>
-								<td>-</td>
-								<td>-</td>
-								<td>-</td>
+								<c:forEach items="${bimestres}" var="bimestre">
+									<c:if test="${alunos.nota == null}">
+										<td>tem não</td>
+									</c:if>
+									<c:forEach items="${aluno.notas}" var="nota">
+										<c:if test="${nota.materia.id == materia.id && nota.bimestre.id == bimestre.id }">
+											<td>${nota.valor}</td>
+										</c:if>
+										<c:if test="${nota.materia.id != materia.id || nota.bimestre.id != bimestre.id }">
+											<td>tem não</td>
+										</c:if>
+									</c:forEach>
+								</c:forEach>
 							</tr>
 						</c:forEach>
 	  				</table>

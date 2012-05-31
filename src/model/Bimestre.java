@@ -1,19 +1,16 @@
 package model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-
-import com.sun.istack.internal.NotNull;
+import javax.validation.constraints.NotNull;
 
 @Entity
-public class Aluno {
+public class Bimestre {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -21,11 +18,17 @@ public class Aluno {
 	@NotNull
 	private String nome;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	private Serie serie;
+	@OneToOne
+	private Nota nota;
 	
-	private String numero;
-	
+	public Nota getNota() {
+		return nota;
+	}
+
+	public void setNota(Nota nota) {
+		this.nota = nota;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -42,19 +45,4 @@ public class Aluno {
 		this.nome = nome;
 	}
 
-	public Serie getSerie() {
-		return serie;
-	}
-
-	public void setSerie(Serie serie) {
-		this.serie = serie;
-	}
-	
-	public String getNumero() {
-		return numero;
-	}
-
-	public void setNumero(String numero) {
-		 this.numero = numero;
-	}
 }

@@ -2,6 +2,7 @@ package controller;
 
 import model.Aluno;
 import dao.AlunoDao;
+import dao.BimestreDao;
 import dao.SerieDao;
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
@@ -17,11 +18,13 @@ public class AlunoController {
 	private Result result;
 	private AlunoDao alunoDao;
 	private SerieDao serieDao;
+	private BimestreDao bimestreDao;
 	
-	public AlunoController( Result result, AlunoDao alunoDao, SerieDao serieDao) {
+	public AlunoController( Result result, AlunoDao alunoDao, SerieDao serieDao, BimestreDao bimestreDao) {
 		this.result = result;
 		this.alunoDao = alunoDao;
 		this.serieDao = serieDao;
+		this.bimestreDao = bimestreDao;
 	}
 	
 	@Path("")
@@ -68,6 +71,6 @@ public class AlunoController {
 	
 	@Get("alunos/{id}/boletim")
 	public void boletim( Long id ) {
-		result.include("aluno", alunoDao.load(id));
+		result.include("aluno", alunoDao.load(id)).include("bimestres", bimestreDao.list());
 	}
 }

@@ -52,12 +52,14 @@ public class SerieController {
 	public void save( Serie serie, List<Long> idMaterias) {
 		String message;
 		try {
-			List<Materia> listaDeMaterias = new ArrayList<Materia>();
-			for (Long id : idMaterias) {
-				Materia materia = materiaDao.load(id);
-				listaDeMaterias.add(materia);
+			if (idMaterias != null) {
+				List<Materia> listaDeMaterias = new ArrayList<Materia>();
+				for (Long id : idMaterias) {
+					Materia materia = materiaDao.load(id);
+					listaDeMaterias.add(materia);
+				}
+				serie.setMaterias(listaDeMaterias);
 			}
-			serie.setMaterias(listaDeMaterias);
 			serieDao.save(serie);
 			message = "Série adicionada com sucesso";
 
@@ -72,15 +74,18 @@ public class SerieController {
 	public void update( Serie serie, List<Long> idMaterias ) {
 		String message;
 		try {
-			List<Materia> listaDeMaterias = new ArrayList<Materia>();
-			for (Long id : idMaterias) {
-				Materia materia = materiaDao.load(id);
-				listaDeMaterias.add(materia);
+			if (idMaterias != null) {
+				List<Materia> listaDeMaterias = new ArrayList<Materia>();
+				for (Long id : idMaterias) {
+					Materia materia = materiaDao.load(id);
+					listaDeMaterias.add(materia);
+				}
+				serie.setMaterias(listaDeMaterias);
+			} else {
+				serie.setMaterias(null);
 			}
-			serie.setMaterias(listaDeMaterias);
 			serieDao.update(serie);
 			message = "Série editada com sucesso";
-
 			result.include("message", message);
 		} catch (Exception e) {
 			message = "Erro ao tentar editar série";
