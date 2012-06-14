@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,7 +12,7 @@ import javax.persistence.OneToOne;
 import com.sun.istack.internal.NotNull;
 
 @Entity
-public class Aluno {
+public class Professor {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -19,9 +21,10 @@ public class Aluno {
 	private String nome;
 	
 	@OneToOne(fetch = FetchType.LAZY)
-	private Serie serie;
+	private List<Serie> series;
 	
-	private String numero;
+	@OneToOne(fetch = FetchType.LAZY)
+	private List<Materia> materias;
 	
 	public Long getId() {
 		return id;
@@ -39,19 +42,19 @@ public class Aluno {
 		this.nome = nome;
 	}
 
-	public Serie getSerie() {
-		return serie;
+	public List<Serie> getSeries() {
+		return series;
 	}
 
-	public void setSerie(Serie serie) {
-		this.serie = serie;
+	public void setSeries(List<Serie> series) {
+		this.series = series;
 	}
 	
-	public String getNumero() {
-		return numero;
+	public List<Materia> getMaterias() {
+		return materias;
 	}
 
-	public void setNumero(String numero) {
-		 this.numero = numero;
+	public void setMaterias(List<Materia> materias) {
+		this.materias = materias;
 	}
 }

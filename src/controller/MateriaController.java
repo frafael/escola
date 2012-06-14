@@ -1,7 +1,12 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import model.Materia;
+import model.Serie;
 import dao.MateriaDao;
+import dao.SerieDao;
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
@@ -14,16 +19,18 @@ import br.com.caelum.vraptor.Result;
 public class MateriaController {
 	
 	private Result result;
-	private MateriaDao MateriaDao;
+	private MateriaDao materiaDao;
+	private SerieDao serieDao;
 	
-	public MateriaController( Result result, MateriaDao MateriaDao) {
+	public MateriaController( Result result, MateriaDao materiaDao, SerieDao serieDao) {
 		this.result = result;
-		this.MateriaDao = MateriaDao;
+		this.materiaDao = materiaDao;
+		this.serieDao = serieDao;
 	}
 	
 	@Get("")
 	public void materias() {
-		result.include("materias", MateriaDao.list());
+		result.include("materias", materiaDao.list());
 	}
 
 	@Get("/new")
@@ -31,30 +38,42 @@ public class MateriaController {
 	
 	@Get("/{id}/edit")
 	public void edit( Long id ) {
-		result.include("materia", MateriaDao.load(id)).forwardTo(this).formulario();
+		result.include("materia", materiaDao.load(id)).forwardTo(this).formulario();
 	}
 	
 	@Get("/{id}/show")
 	public void show( Long id ) {
-		result.include("materia", MateriaDao.load(id));
+		result.include("materia", materiaDao.load(id));
 	}
 	
 	@Post("")
 	public void save( Materia materia ) {
-		MateriaDao.save(materia);
+		materiaDao.save(materia);
 		result.redirectTo(this).materias();
 	}
 	
 	@Put("")
 	public void update( Materia materia ) {
-		MateriaDao.update(materia);
+		materiaDao.update(materia);
 		result.redirectTo(this).materias();
 	}
 	
 	@Delete("/{id}")
 	public void delete( Long id ) {
-		Materia materia = MateriaDao.load(id);
-		MateriaDao.delete(materia);
+		Materia materia = materiaDao.load(id);
+		List<Serie> series = serieDao.list();
+		List<Materia> newMaterias = new ArrayList<Materia>();
+		for( Serie serie : series) {
+			List<Materia> materias = serie.getMaterias();
+			for ( Materia serieMateria : materias) {
+				if ( serieMateria.getId() != materia.getId()) {
+					newMaterias.add(serieMateria);
+				}
+			}
+			serie.setMaterias(newMaterias);
+		}
+		
+		materiaDao.delete(materia);
 		result.redirectTo(this).materias();
 	}
 }

@@ -2,6 +2,9 @@ var escola = {
 	init : function() {
 		this.boxDialog.init();
 	},
+	optionProfessor : function () {
+		
+	},
 	formDelete : function( elementDelete ) {
 		$form = $("#formDelete"),
 			novaActionDelete = $form.attr("action").replace("/?", "/"+ elementDelete);
