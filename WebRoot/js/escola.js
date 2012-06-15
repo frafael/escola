@@ -2,8 +2,13 @@ var escola = {
 	init : function() {
 		this.boxDialog.init();
 	},
-	optionProfessor : function () {
-		
+	optionProfessor : function (idSerie) {
+		var isCheckboxChecked = $("."+ idSerie).is(":checked");
+		if( isCheckboxChecked ) {
+			$("#"+ idSerie).find(".materias").show();
+		} else {
+			$("#"+ idSerie).find(".materias").hide();
+		}
 	},
 	formDelete : function( elementDelete ) {
 		$form = $("#formDelete"),

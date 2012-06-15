@@ -3,7 +3,7 @@
 <jsp:include page="../index/header.jsp" />
 <script type="text/javascript">
 	$(function() {
-		$("#formNewConteudo").wrapLabel();
+		$(".materias").hide();
 	});
 </script>
 	<div id="formulario">
@@ -12,7 +12,7 @@
 	  			<input type="hidden" name="professor.id" value="${professor.id}" />
 	  			<input type='hidden' name='_method' value='PUT'/>
 	  		</c:if>
-	  		<fieldset>
+	  		<fieldset class="newProfessor">
 	  		<legend>
 	  			<c:if test="${professor.id == null}">Novo Professor</c:if>
 	  			<c:if test="${professor.id != null}">Editar Professor</c:if>
@@ -20,24 +20,22 @@
 	  			<div>
 	  				<label>Nome:</label><input type="text" class="required" maxlength="128" name="professor.nome" value="${professor.nome}">
 	  			</div>
-	  			<div style="float: left; margin-right:30px; ">
-		  			<label>Séries:</label>
-		  			<select name="professor.serie.id">
-		  			  <option value="">Escolha uma série...</option>
-		  			  <c:forEach items="${series}" var="serie">
-					  	<option onclick="escola.optionProfessor()" <c:if test="${serie.id == professor.serie.id}">selected="selected"</c:if> value="${serie.id}">${serie.nome}</option>
-					  </c:forEach>
-					</select>
-					<div class="materias" style="">
-						Disciplinas a serem ministradas nesta série:
-			  			<c:forEach items="${serie.materias}" var="materia">
-				  				<div>
-					  					<input type="checkbox" name="idMaterias" value="${materia.id}"> ${materia.nome}		  				
-				  				</div>
-			  			</c:forEach>
-					</div>
+	  			Séries a serem lecionadas:
+	  			<div style=" margin-right:30px; " class="newSerie">
+				  <c:forEach items="${series}" var="serie">
+				  			<div id="${serie.id}">
+				  					<input class="${serie.id}" type="checkbox" onclick="escola.optionProfessor(${serie.id})" name="professor.series" value="${serie.id}"> ${serie.nome}		  				
+			  						<div class="materias" style="">
+										Disciplinas a serem ministradas nesta série:
+							  			<c:forEach items="${serie.materias}" var="materia">
+								  				<div>
+									  					<input type="checkbox" name="professor.materias" value="${materia.id}"> ${materia.nome}		  				
+								  				</div>
+							  			</c:forEach>
+									</div>
+			  				</div>
+			  	  </c:forEach>
 		  		</div>
-		  		
 	  		</fieldset>
 			<button class="btn primary">Gravar</button>
 			<a class='btn small' href="<c:url value='/professores'/>">Voltar</a>
